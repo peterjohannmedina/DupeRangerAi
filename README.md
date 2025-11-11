@@ -87,6 +87,8 @@ DupeRangerAi is an intelligent file organization tool that helps you:
    - Click "Apply Actions" to preview changes
    - Uncheck "Dry-run" and apply to execute changes
 
+📖 **For detailed user instructions, see [USER_GUIDE.md](USER_GUIDE.md)** - a comprehensive consumer-friendly guide with step-by-step instructions, troubleshooting, and tips.
+
 ## Configuration Options
 
 ### Scanning Options
