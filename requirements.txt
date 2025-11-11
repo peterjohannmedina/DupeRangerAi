@@ -1,0 +1,21 @@
+# Requirements for AiDupeRanger_claude
+# Install with: pip install -r requirements.txt
+
+# Core dependencies (required)
+pyinstaller>=6.0.0
+
+# Optional: Fast hashing (highly recommended)
+xxhash>=3.0.0
+
+# Optional: AI categorization (requires significant disk space ~5GB)
+# Uncomment the following lines to enable AI features:
+# torch>=2.0.0
+# transformers>=4.30.0
+# huggingface-hub>=0.16.0
+
+# Note: For AI features, you may want to install PyTorch separately
+# with CUDA support for GPU acceleration:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# For CPU-only PyTorch (smaller download):
+# pip install torch torchvision torchaudio
