@@ -19,6 +19,13 @@ import tkinter as tk
 from tkinter import ttk
 
 
+# DupeRangerAi - Intelligent Duplicate File Finder Powered by Local AI
+# Copyright (c) 2025 Peter Johann Medina
+# Developed by Peter Johann Medina
+# For more information, visit: https://ReclaimDev.com
+# Licensed under MIT License
+
+
 class Tooltip:
     """A very small tooltip helper for Tkinter widgets."""
     def __init__(self, widget, text: str, delay: int = 400):
@@ -418,7 +425,7 @@ class FileScanner(threading.Thread):
 class FileOrganizerApp:
     def __init__(self, root: tk.Tk) -> None:
         self.root = root
-        self.root.title("DupeRangerAi Duplicate File Finder v1.1")
+        self.root.title("DupeRangerAi Duplicate File Finder v1.1 - Developed by Peter Johann Medina")
         self.root.geometry("960x640")
 
         self.queue: Queue = Queue()
@@ -438,6 +445,15 @@ class FileOrganizerApp:
         self.root.after(200, self._poll_queue)
 
     def _build_ui(self) -> None:
+        # Add menu bar with copyright information
+        menubar = tk.Menu(self.root)
+        self.root.config(menu=menubar)
+
+        # Help menu
+        help_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Help", menu=help_menu)
+        help_menu.add_command(label="About", command=self._show_about)
+
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(2, weight=1)
 
@@ -818,7 +834,19 @@ class FileOrganizerApp:
                 "", tk.END, text=category, values=(stats["count"], f"{size_mb:.2f}")
             )
 
-    def _show_hf_cache(self) -> None:
+    def _show_about(self) -> None:
+        """Display copyright and developer information."""
+        about_text = """DupeRangerAi - Intelligent Duplicate File Finder v1.1
+
+Developed by Peter Johann Medina
+For more information, visit: https://ReclaimDev.com
+
+Copyright (c) 2025 Peter Johann Medina
+Licensed under MIT License
+
+This application uses AI-powered file categorization
+with Hugging Face transformers for intelligent organization."""
+        messagebox.showinfo("About DupeRangerAi", about_text)
         """Display the Hugging Face cache path and list the largest model files (top 10)."""
         try:
             from pathlib import Path

@@ -169,6 +169,14 @@ python test_actions.py
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+## Copyright
+
+**DupeRangerAi** is developed by **Peter Johann Medina**.
+
+For more information about the developer and additional projects, visit: [https://ReclaimDev.com](https://ReclaimDev.com)
+
+Copyright (c) 2025 Peter Johann Medina. All rights reserved.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
