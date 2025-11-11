@@ -847,6 +847,8 @@ Licensed under MIT License
 This application uses AI-powered file categorization
 with Hugging Face transformers for intelligent organization."""
         messagebox.showinfo("About DupeRangerAi", about_text)
+
+    def _show_hf_cache(self) -> None:
         """Display the Hugging Face cache path and list the largest model files (top 10)."""
         try:
             from pathlib import Path
