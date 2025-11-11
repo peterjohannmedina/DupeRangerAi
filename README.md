@@ -1,5 +1,15 @@
 # DupeRangerAi - Intelligent Duplicate File Finder
 
+![DupeRangerAi screenshot](docs/images/duperanger_screenshot.png)
+
+**Version:** 1.1
+**Platform:** Windows
+**License:** MIT
+## Overview
+
+DupeRangerAi is an intelligent file organization tool that helps you:
+# DupeRangerAi - Intelligent Duplicate File Finder
+
 **Version:** 1.1
 **Platform:** Windows
 **License:** MIT
