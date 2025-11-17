@@ -1,8 +1,7 @@
 """Compatibility shim for the renamed script.
 
-If other tools or docs still call `tk_file_organizer.py`, this small shim
-imports and runs the canonical entrypoint in `DupeRangerAi.py` with a
-fallback to the legacy `AiDupeRanger.py` to preserve compatibility.
+This file imports and runs the canonical entrypoint in `DupeRangerAi.py`.
+Legacy variants were removed from the public repo to avoid confusion.
 """
 
 from importlib import import_module

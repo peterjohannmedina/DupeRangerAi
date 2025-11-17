@@ -1,4 +1,4 @@
-# Build Script for DupeRangerAi (formerly AiDupeRanger_claude)
+# Build Script for DupeRangerAi
 # This script packages the application into a Windows executable using PyInstaller
 
 param(

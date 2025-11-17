@@ -80,7 +80,7 @@ For advanced users:
 
 ```powershell
 # Using the spec file (recommended)
-pyinstaller --clean --noconfirm AiDupeRanger_claude.spec
+pyinstaller --clean --noconfirm DupeRangerAi.spec
 
 # Or build without spec file
 pyinstaller --onefile --windowed --name=AiDupeRanger_claude AiDupeRanger_claude.py
@@ -161,8 +161,8 @@ After a successful build, you'll have:
 
 ```
 DupeRanger/
-├── AiDupeRanger_claude.py          # Source code
-├── AiDupeRanger_claude.spec        # PyInstaller configuration
+├── DupeRangerAi.py          # Source code (canonical entry)
+├── DupeRangerAi.spec        # PyInstaller configuration (preferred)
 ├── build_windows.ps1               # Build script
 ├── build.bat                       # Batch build script
 ├── requirements.txt                # Python dependencies

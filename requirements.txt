@@ -1,4 +1,4 @@
-# Requirements for AiDupeRanger_claude
+# Requirements for DupeRangerAi
 # Install with: pip install -r requirements.txt
 
 # Core dependencies (required)
