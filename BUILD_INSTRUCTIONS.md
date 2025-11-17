@@ -92,7 +92,7 @@ pyinstaller --onefile --windowed --name=AiDupeRanger_claude AiDupeRanger_claude.
 
 ### Spec File Options
 
-Edit `AiDupeRanger_claude.spec` to customize the build:
+Edit `AiDupeRanger_claude.spec` to customize the build (note: this grok/claude variant is archived; prefer `DupeRangerAi.py` for current builds):
 
 #### Include AI Dependencies
 

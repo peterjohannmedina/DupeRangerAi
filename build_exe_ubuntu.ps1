@@ -1,4 +1,4 @@
-# AiDupeRanger Ubuntu Build Script (PowerShell for cross-platform)
+# DupeRangerAi Ubuntu Build Script (PowerShell for cross-platform)
 # Run this on Ubuntu 22.04 or WSL Ubuntu to create portable executable
 
 param(
@@ -6,7 +6,7 @@ param(
     [switch]$Test
 )
 
-Write-Host "=== AiDupeRanger Ubuntu Build Script ===" -ForegroundColor Green
+Write-Host "=== DupeRangerAi Ubuntu Build Script ===" -ForegroundColor Green
 Write-Host "Building portable executable for Ubuntu 22.04" -ForegroundColor Green
 Write-Host
 
@@ -138,10 +138,10 @@ if (Test-Path "test_actions.py") {
 $InstallerScript = @'
 #!/bin/bash
 
-# AiDupeRanger Ubuntu Dependencies Installer
+# DupeRangerAi Ubuntu Dependencies Installer
 # Run this script to install system dependencies on Ubuntu 22.04
 
-echo "=== AiDupeRanger Ubuntu Dependencies Installer ==="
+echo "=== DupeRangerAi Ubuntu Dependencies Installer ==="
 echo "Installing system dependencies for Ubuntu 22.04..."
 echo
 
@@ -210,9 +210,9 @@ bash -c "chmod +x '$OutputDir/install_deps_ubuntu.sh'"
 
 # Create a README for Ubuntu
 $ReadmeContent = @"
-# AiDupeRanger for Ubuntu
+# DupeRangerAi for Ubuntu
 
-This is a portable version of AiDupeRanger built for Ubuntu 22.04.
+This is a portable version of DupeRangerAi built for Ubuntu 22.04.
 
 ## Quick Start
 

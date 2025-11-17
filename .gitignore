@@ -124,9 +124,9 @@ Thumbs.db
 .cache/huggingface/
 
 # Build artifacts specific to your project
-AiDupeRanger_grok/
-AiDupeRanger_claude/
-AiDupeRanger/
+deprecated_variants/AiDupeRanger_grok/
+deprecated_variants/AiDupeRanger_claude/
+deprecated_variants/AiDupeRanger/
 *.exe
 
 # Ollama installer (not needed in repo)

@@ -3,7 +3,7 @@
 ## Project Overview
 AiDupeRanger is a Python desktop application for intelligent duplicate file detection and organization. It combines fast hashing algorithms with AI-powered file categorization using Hugging Face transformers, built as a standalone Windows executable via PyInstaller.
 
-**Primary Variant**: `DupeRangerAi.py` is the canonical main developed version with full AI integration. Other historical variants (`AiDupeRanger_grok.py`, `AiDupeRanger_claude.py`, `AiDupeRanger.py`) are preserved for reference but are no longer the canonical build targets.
+**Primary Variant**: `DupeRangerAi.py` is the canonical main developed version with full AI integration. Historical variants have been removed from the public repository to avoid confusion.
 
 ## Architecture
 
@@ -109,7 +109,7 @@ except (PermissionError, FileNotFoundError):
 ## Configuration & Dependencies
 
 ### Build Configuration
-- **PyInstaller spec files**: `AiDupeRanger_*.spec` control executable bundling
+- **PyInstaller spec files**: `DupeRangerAi_*.spec` control executable bundling
 - **Hidden imports**: AI libraries bundled separately to reduce base executable size
 - **Data collection**: Model files and tokenizers collected for standalone operation
 
@@ -187,16 +187,14 @@ print(f"Phase completed in {elapsed:.2f}s")
 
 ### Source Files
 - `DupeRangerAi.py`: **Primary developed version** with full AI integration and file organization
-- `AiDupeRanger_grok.py`: Previous grok variant (deprecated)
-- `AiDupeRanger_claude.py`: Alternative variant with different configuration
-- `AiDupeRanger.py`: Base implementation without AI features
+- Historical variants such as `AiDupeRanger_grok.py`, `AiDupeRanger_claude.py`, and `AiDupeRanger.py` have been removed from the public repository.
 - `tk_file_organizer.py`: Legacy/backup implementation
 - `*_test.py`: Test scripts for validation
 
 ### Build Artifacts
 - `build/`: PyInstaller temporary files (safe to delete)
 - `dist/`: PyInstaller output (safe to delete)
-- `AiDupeRanger_*_Package/`: Final distributable packages
+- Legacy package names (`AiDupeRanger_*`) have been removed from the repository.
 
 ### Configuration Files
 - `*.spec`: PyInstaller specifications
@@ -250,6 +248,6 @@ print(f"Phase completed in {elapsed:.2f}s")
 - **Large scans**: Scales with file count, not size
 
 ### Build Sizes
-- **Base executable** (`AiDupeRanger.py`): ~30MB (no AI bundled)
+- **Base executable**: Use `DupeRangerAi.py` (no legacy base executable retained here)
 - **AI executable** (`DupeRangerAi.py`): ~1.5GB with AI features (PyTorch GPU support available)
 - **Build time**: 2-30 minutes depending on configuration

@@ -1,4 +1,4 @@
-# Build Script for AiDupeRanger_claude
+# Build Script for DupeRangerAi (formerly AiDupeRanger_claude)
 # This script packages the application into a Windows executable using PyInstaller
 
 param(
@@ -14,8 +14,8 @@ Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
 # Configuration
-$ScriptName = "AiDupeRanger_claude"
-$OutputFolder = "AiDupeRanger_claude_Package"
+$ScriptName = "DupeRangerAi"
+$OutputFolder = "DupeRangerAi_Package"
 $DistFolder = "dist"
 $BuildFolder = "build"
 

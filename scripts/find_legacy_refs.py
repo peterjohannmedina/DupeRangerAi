@@ -25,6 +25,7 @@ EXCLUDE_DIRS = {
     "AiDupeRanger",
     "DupeRangerAi_2025-11-11",
 }
+EXCLUDE_FILES = {"AiDupeRanger.py", "AiDupeRanger_claude.spec", "AiDupeRanger_grok.spec"}
 
 
 def matches(filename, text):
@@ -43,6 +44,8 @@ def main():
         if any(part in EXCLUDE_DIRS for part in relroot.split(os.sep) if part):
             continue
         for fname in files:
+            if fname in EXCLUDE_FILES:
+                continue
             fpath = os.path.join(root, fname)
             try:
                 with open(fpath, "r", encoding="utf-8", errors="ignore") as fh:

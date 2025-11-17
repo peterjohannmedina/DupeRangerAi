@@ -125,11 +125,13 @@ For users who prefer a standalone executable:
 .\build_exe.ps1
 
 # By default the build script targets the canonical entry `DupeRangerAi.py`.
-# To build a different script (for example the lightweight non-grok variant
-# `AiDupeRanger.py`), specify the entry script when running the build script:
-```powershell
-.\build_exe.ps1 -EntryScript "AiDupeRanger.py" -OutputDir "AiDupeRanger"
-```
+# To build a different script, specify the entry script when running the build script.
+# NOTE: Historical variants and previous packaging names have been removed from the
+# public repository to avoid confusion — prefer `DupeRangerAi.py` for the canonical
+# entrypoint.
+````powershell
+.\build_exe.ps1 -EntryScript "MyCustomEntry.py" -OutputDir "MyPackage"
+````
 
 # The executable will be created in DupeRangerAi/DupeRangerAi.exe (default)
 ```
@@ -149,7 +151,8 @@ python test_actions.py
 ## Troubleshooting
 ## ⚠️ Deprecated variants
 
-This repository historically included a few alternate entry scripts and packaging variants (e.g., `AiDupeRanger_grok`, `AiDupeRanger_claude`, and `AiDupeRanger.py`). These variants are now archived and should not be used for new builds — `DupeRangerAi.py` is the canonical main script.
+This repository historically included a few alternate entry scripts and packaging variants.
+These legacy variants have been removed from the public repository to avoid confusion. Prefer `DupeRangerAi.py` as the canonical main script.
 
 If you need to inspect old variants, check `deprecated_variants/` where we keep archived copies and additional notes.
 

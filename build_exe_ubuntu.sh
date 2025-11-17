@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# AiDupeRanger Ubuntu Build Script
+# DupeRangerAi Ubuntu Build Script
 # Creates a portable executable for Ubuntu 22.04
 
 set -e  # Exit on any error
 
-echo "=== AiDupeRanger Ubuntu Build Script ==="
+echo "=== DupeRangerAi Ubuntu Build Script ==="
 echo "Building portable executable for Ubuntu 22.04"
 echo
 
@@ -108,10 +108,10 @@ cp test_actions.py "$OUTPUT_DIR/" 2>/dev/null || true
 cat > "$OUTPUT_DIR/install_deps_ubuntu.sh" << 'EOF'
 #!/bin/bash
 
-# AiDupeRanger Ubuntu Dependencies Installer
+# DupeRangerAi Ubuntu Dependencies Installer
 # Run this script to install system dependencies on Ubuntu 22.04
 
-echo "=== AiDupeRanger Ubuntu Dependencies Installer ==="
+echo "=== DupeRangerAi Ubuntu Dependencies Installer ==="
 echo "Installing system dependencies for Ubuntu 22.04..."
 echo
 
@@ -178,9 +178,9 @@ chmod +x "$OUTPUT_DIR/install_deps_ubuntu.sh"
 
 # Create a README for Ubuntu
 cat > "$OUTPUT_DIR/README_ubuntu.md" << EOF
-# AiDupeRanger for Ubuntu
+# DupeRangerAi for Ubuntu
 
-This is a portable version of AiDupeRanger built for Ubuntu 22.04.
+This is a portable version of DupeRangerAi built for Ubuntu 22.04.
 
 ## Quick Start
 

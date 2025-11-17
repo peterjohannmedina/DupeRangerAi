@@ -3,7 +3,7 @@ REM Simple batch file to run the PowerShell build script
 REM Usage: build.bat [clean]
 
 echo ========================================
-echo   AiDupeRanger Build Script (Batch)
+echo   DupeRangerAi Build Script (Batch) - canonical entry is DupeRangerAi.py
 echo ========================================
 echo.
 

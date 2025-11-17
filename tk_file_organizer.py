@@ -12,7 +12,9 @@ try:
     try:
         mod = import_module("DupeRangerAi")
     except ModuleNotFoundError:
-        mod = import_module("AiDupeRanger")
+        # Canonical script not found; don't fall back to legacy names to avoid
+        # silent imports of removed variants. Explicitly inform the caller.
+        raise
     main = getattr(mod, "main")
 except Exception as exc:  # pragma: no cover - fallback reporting
     raise SystemExit(f"Failed to load AiDupeRanger module: {exc}")
