@@ -117,6 +117,10 @@ if ($UseGPU) {
     if ($LASTEXITCODE -ne 0) { Write-Error "CPU torch install failed. Please install manually."; exit 1 }
 }
 
+# Note for clarity: the CPU-only path above will not attempt to install any GPU drivers or CUDA toolkits.
+# The installer only installs Python wheels. To enable GPU wheels a user must pass -UseGPU and have drivers/CUDA already
+# installed or the script will fall back to CPU-only wheels automatically.
+
 Write-Status "Installation complete. You can run the UI with:"
 Write-Host "  .\.venv\Scripts\Activate.ps1  # (optional) activate the venv"
 Write-Host "  .\.venv\Scripts\python.exe AiDupeRanger.py"

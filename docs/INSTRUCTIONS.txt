@@ -1,0 +1,157 @@
+DupeRanger - tk_file_organizer Instructions
+
+Overview
+--------
+This repository contains `AiDupeRanger.py`, a Tkinter-based utility that scans a directory (including subdirectories), computes optional SHA-256 hashes for duplicate detection, and can optionally classify files using an AI model (via the `transformers` + `torch` stack).
+
+This document lists the dependencies to install on Windows and explains how to use the UI program.
+
+Important files created
+----------------------
+- `AiDupeRanger.py`  - Main Tkinter UI script (in project root).
+- `install_deps.ps1`     - PowerShell helper that creates a venv and installs Python package dependencies.
+- `docs/INSTRUCTIONS.html` - HTML version of this documentation.
+
+Dependencies (Python and system)
+--------------------------------
+1) Python
+   - Recommended: Python 3.10+ (you already have Python 3.14 installed). Ensure `python` is available in PATH. If not, install from: https://www.python.org/downloads/
+
+2) (Optional, GPU acceleration)
+   - NVIDIA driver (latest for your GPU).
+   - CUDA Toolkit matching your driver and the torch wheel you'll install. See NVIDIA downloads: https://developer.nvidia.com/cuda-downloads
+   - If you plan to use GPU acceleration, verify `nvidia-smi` is available in PowerShell.
+
+3) Python packages (installed by script)
+   - transformers
+   - huggingface_hub
+   - accelerate (optional helper for some models)
+   - torch, torchvision, torchaudio (CPU or CUDA-enabled wheel depending on your GPU)
+   - sentencepiece (if you plan to use tokenizers that require it)
+
+Using the included installer script (PowerShell)
+-----------------------------------------------
+Open PowerShell (recommended: run as Administrator if you want to allow symlinks or change system settings).
+
+1) Allow script execution for the session (optional):
+
+   ```powershell
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+   ```
+
+2) Run the installer script in the project root. For CPU-only install (default):
+
+   ```powershell
+   .\install_deps.ps1
+   ```
+
+   To attempt a GPU-enabled install (will try a typical CUDA wheel and fall back to CPU on failure):
+
+   ```powershell
+   .\install_deps.ps1 -UseGPU
+
+Note: Running the install script WITHOUT `-UseGPU` will install CPU-only packages and will not install or attempt to install GPU drivers (NVIDIA driver or CUDA toolkit). If you want GPU support, rerun with `-UseGPU` and appropriate CUDA/drivers already installed on your system.
+   ```
+
+What the installer script does
+------------------------------
+- Creates a virtual environment in `.venv` inside the project folder (if it doesn't already exist).
+- Uses the venv's Python to upgrade pip and install dependencies into the venv.
+- If `-UseGPU` is provided, the script attempts to install CUDA-enabled torch wheels (it tries CUDA 12.1 wheels). If the GPU install fails, it falls back to a CPU wheel.
+ - If `-UseGPU` is provided, the script will attempt to detect your system CUDA version (via `nvidia-smi`) and install a matching CUDA-enabled torch wheel (e.g., cu121 for CUDA 12.1). If detection or GPU install fails, it falls back to a CPU wheel.
+ - If `-UseGPU` is provided, the script will attempt to detect your system CUDA version (via `nvidia-smi`) and try multiple matching CUDA-enabled torch wheels (e.g., cu121, cu118, cu117). If detection or GPU install fails, it falls back to a CPU wheel.
+- Prints next steps to run the UI using the venv's Python.
+
+How to run the UI program
+-------------------------
+From PowerShell in the project folder:
+
+1) (Optional) Activate the virtual environment for interactive sessions:
+
+   ```powershell
+   .\.venv\Scripts\Activate.ps1
+   ```
+
+2) Run the Tkinter UI:
+
+   ```powershell
+   .\.venv\Scripts\python.exe AiDupeRanger.py
+   ```
+
+   Or, if you installed dependencies globally (not recommended):
+
+   ```powershell
+   python AiDupeRanger.py
+   ```
+
+UI basics
+---------
+- Click "Browse" to pick the root directory (your ZFS share mounted via SMB, e.g. `Z:\share`).
+- Option: check "Compute SHA-256 hashes" to enable duplicate detection (this is slower for large files or many files).
+- Option: check "Enable AI categorization" to use the transformers-based zero-shot classifier. This requires `torch` and `transformers` installed.
+ - Option: check "Enable AI categorization" to use the transformers-based zero-shot classifier. This requires `torch` and `transformers` installed. You can also choose the compute device using the "Compute device" selector (Auto / GPU / CPU). `Auto` will use GPU if available.
+ - Option: check "Enable AI categorization" to use the transformers-based zero-shot classifier. This requires `torch` and `transformers` installed. You can also choose the compute device using the "Compute device" selector (Auto / GPU / CPU). `Auto` will use GPU if available. The app now includes a "Show HF cache" button to view your Hugging Face cache path and largest model files.
+- Click Scan to begin. Progress is shown in the status text.
+- Tabs:
+  - "By Extension": extension summary (count and aggregate size).
+  - "Duplicates": lists duplicate hash groups (if hashing enabled).
+  - "AI Categories": shows categories assigned by the model (if enabled).
+- Use "Export summary" to save a JSON file with the scan summary (extensions, categories, duplicates).
+
+Hugging Face cache and disk usage
+---------------------------------
+- Models downloaded by `transformers` / `huggingface_hub` are cached in your home cache directory. On Windows this is typically `C:\Users\<yourname>\.cache\huggingface\hub\`.
+- To change where models/fetches are cached, set the environment variables before running the script (PowerShell example):
+
+  ```powershell
+  $env:HF_HOME = "D:\hf_cache"
+  $env:TRANSFORMERS_CACHE = "D:\hf_cache\transformers"
+  # Then run the installer and the UI in the same shell session so the variables are honored.
+  ```
+
+- If you need symlink support for the Hugging Face cache on Windows, enable Windows "Developer Mode" or run Python as administrator. Otherwise the hub will fall back to a non-symlink caching mode (works, but duplicates files and may use more disk space).
+
+Troubleshooting
+---------------
+- If `nvcc` or `nvidia-smi` is not found, verify NVIDIA drivers and CUDA toolkit installation. `nvidia-smi` is provided by the driver; `nvcc` is from CUDA toolkit.
+- If the AI categorizer fails to initialize, check that the `transformers` and `torch` packages are installed inside the venv you are using.
+- If downloads fail due to disk or permissions, consider setting `HF_HOME` to a writable drive and re-running the installer.
+
+Manual package install commands (if you prefer not to use the script)
+-------------------------------------------------------------------
+CPU-based (simple):
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install transformers huggingface_hub accelerate sentencepiece
+# CPU-only PyTorch wheel (example for CPU index):
+.\.venv\Scripts\python.exe -m pip install --index-url https://download.pytorch.org/whl/cpu torch torchvision torchaudio
+```
+
+GPU-based (example, may vary by CUDA version):
+
+```powershell
+# Replace cu121 with the CUDA version that matches your system and the PyTorch wheel availability
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install transformers huggingface_hub accelerate sentencepiece
+.\.venv\Scripts\python.exe -m pip install --index-url https://download.pytorch.org/whl/cu121 torch torchvision torchaudio --extra-index-url https://pypi.org/simple
+```
+
+Cleaning up downloaded models
+----------------------------
+If you want to remove downloaded models to free space:
+
+```powershell
+Remove-Item -LiteralPath "$env:USERPROFILE\.cache\huggingface\hub\models--<repo-id>" -Recurse -Force
+```
+
+Contact / Next steps
+--------------------
+If you want, I can also:
+- Add a small button in the UI to display the Hugging Face cache path and the largest files.
+- Add a separate tool to move the cache to another drive and symlink it.
+- Configure the AI classifier to use a different model or an on-disk optimized engine (TensorRT) if you have an NVIDIA GPU.
+
+---
+Generated on: 2025-11-05
