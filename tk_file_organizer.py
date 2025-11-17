@@ -16,7 +16,7 @@ try:
         raise
     main = getattr(mod, "main")
 except Exception as exc:  # pragma: no cover - fallback reporting
-    raise SystemExit(f"Failed to load AiDupeRanger module: {exc}")
+    raise SystemExit(f"Failed to load DupeRangerAi module: {exc}")
 
 
 if __name__ == "__main__":

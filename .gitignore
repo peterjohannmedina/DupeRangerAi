@@ -124,10 +124,14 @@ Thumbs.db
 .cache/huggingface/
 
 # Build artifacts specific to your project
-# Deprecated variant archives
-#deprecated_variants/AiDupeRanger_grok/
-#deprecated_variants/AiDupeRanger_claude/
-#deprecated_variants/AiDupeRanger/
+# Deprecated variant archives (keep excluded if present)
+deprecated_variants/
+# Local-only test scripts (do not commit)
+test_*.py
+*_test.py
+synthetic_test.py
+.pytest_cache/
+local_tests/
 *.exe
 
 # Ollama installer (not needed in repo)

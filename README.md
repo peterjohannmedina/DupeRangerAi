@@ -24,6 +24,9 @@ DupeRangerAi is an intelligent file organization tool that helps you:
 - **Smart Duplicate Handling** with configurable primary file selection and safe renaming
 - **Safe Operations** with preview, logging, and rollback capability
 
+## What's new (v1.1)
+- Bug fixes: Fixed a missing `_show_hf_cache` helper that previously raised an AttributeError when the "Show HF cache" button was clicked; this now displays the cache path and lists the largest cached model files.
+
 ## Features
 
 ### 🔍 Duplicate Detection
@@ -142,10 +145,10 @@ Run the included tests to verify functionality:
 
 ```powershell
 # Performance testing with synthetic data
-python synthetic_test.py
+python local_tests/synthetic_test.py
 
 # Action testing (file operations)
-python test_actions.py
+python local_tests/test_actions.py
 ```
 
 ## Troubleshooting

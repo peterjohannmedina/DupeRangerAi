@@ -101,8 +101,16 @@ cp "$DIST_DIR/$SCRIPT_NAME" "$OUTPUT_DIR/"
 echo "Copying documentation and scripts..."
 cp -r docs/* "$OUTPUT_DIR/" 2>/dev/null || true
 cp install_deps.ps1 "$OUTPUT_DIR/" 2>/dev/null || true
-cp synthetic_test.py "$OUTPUT_DIR/" 2>/dev/null || true
-cp test_actions.py "$OUTPUT_DIR/" 2>/dev/null || true
+if [[ -f local_tests/synthetic_test.py ]]; then
+    cp local_tests/synthetic_test.py "$OUTPUT_DIR/" 2>/dev/null || true
+else
+    echo "no local_tests/synthetic_test.py found; skipping"
+fi
+if [[ -f local_tests/test_actions.py ]]; then
+    cp local_tests/test_actions.py "$OUTPUT_DIR/" 2>/dev/null || true
+else
+    echo "no local_tests/test_actions.py found; skipping"
+fi
 
 # Create Ubuntu-specific dependency installer
 cat > "$OUTPUT_DIR/install_deps_ubuntu.sh" << 'EOF'

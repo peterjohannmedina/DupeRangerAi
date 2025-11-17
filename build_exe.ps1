@@ -89,8 +89,17 @@ if ($OneFile) {
 # Copy documentation and scripts
 Write-Host "Copying documentation and scripts..." -ForegroundColor Green
 Copy-Item "docs\*" $OutputDir\ -Recurse -ErrorAction SilentlyContinue
-Copy-Item "synthetic_test.py" $OutputDir\
-Copy-Item "test_actions.py" $OutputDir\
+if (-not (Test-Path "local_tests\synthetic_test.py")) {
+    Write-Host "  - No local synthetic_test.py found (ok)" -ForegroundColor Yellow
+} else {
+    Copy-Item "local_tests\synthetic_test.py" $OutputDir\ -ErrorAction SilentlyContinue
+}
+
+if (-not (Test-Path "local_tests\test_actions.py")) {
+    Write-Host "  - No local test_actions.py found (ok)" -ForegroundColor Yellow
+} else {
+    Copy-Item "local_tests\test_actions.py" $OutputDir\ -ErrorAction SilentlyContinue
+}
 Copy-Item "install_deps.ps1" $OutputDir\
 Copy-Item "README.md" $OutputDir\ -ErrorAction SilentlyContinue
 

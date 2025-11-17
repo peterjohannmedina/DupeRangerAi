@@ -1,4 +1,4 @@
-# Build Instructions for AiDupeRanger_claude
+# Build Instructions for DupeRangerAi
 
 This document explains how to build the Windows executable from source.
 
@@ -49,15 +49,16 @@ The easiest way to build:
 ```powershell
 # Navigate to project directory
 cd C:\Users\NM2\Documents\DevProjects\DupeRanger
-
+**Minimum:**
+- `DupeRangerAi.exe`
 # Run build script
 .\build_windows.ps1
-
+ - Full `DupeRangerAi_Package/` folder
 # Or for clean build (removes previous builds first):
 .\build_windows.ps1 -Clean
 ```
 
-**Output:** `AiDupeRanger_claude_Package\` folder with the executable
+**Output:** `DupeRangerAi_Package\` folder with the executable
 
 ### Method 2: Using Batch File
 
@@ -71,28 +72,28 @@ REM Normal build
 build.bat
 
 REM Clean build
-build.bat clean
+         - run: pyinstaller --clean --noconfirm DupeRangerAi.spec
 ```
 
-### Method 3: Manual PyInstaller Command
-
+               name: DupeRangerAi
+               path: dist/DupeRangerAi.exe
 For advanced users:
 
 ```powershell
 # Using the spec file (recommended)
 pyinstaller --clean --noconfirm DupeRangerAi.spec
 
-# Or build without spec file
-pyinstaller --onefile --windowed --name=AiDupeRanger_claude AiDupeRanger_claude.py
+ pyinstaller --clean DupeRangerAi.spec
+pyinstaller --onefile --windowed --name=DupeRangerAi DupeRangerAi.py
 ```
 
 ---
 
 ## Build Configuration
 
-### Spec File Options
+ pyinstaller --clean DupeRangerAi.spec
 
-Edit `AiDupeRanger_claude.spec` to customize the build (note: this grok/claude variant is archived; prefer `DupeRangerAi.py` for current builds):
+Edit `DupeRangerAi.spec` to customize the build.
 
 #### Include AI Dependencies
 
@@ -100,14 +101,14 @@ By default, AI libraries (torch, transformers) are **not bundled** to reduce exe
 
 To bundle AI features:
 
-1. Open `AiDupeRanger_claude.spec`
+    signtool sign /f certificate.pfx /p password /t http://timestamp.digicert.com DupeRangerAi.exe
 2. Uncomment these lines in `hiddenimports`:
    ```python
    'torch',
    'transformers',
    'huggingface_hub',
    ```
-3. Rebuild
+3. Rebuild (using `pyinstaller --clean --noconfirm DupeRangerAi.spec`)
 
 **Warning:** This will increase the executable size to ~1-2 GB and build time to 10-30 minutes.
 
@@ -115,7 +116,7 @@ To bundle AI features:
 
 1. Create or obtain a `.ico` file (256x256 recommended)
 2. Place it in the project directory
-3. Edit `AiDupeRanger_claude.spec`, change:
+3. Edit `DupeRangerAi.spec`, change:
    ```python
    icon=None,  # Change to:
    icon='your_icon.ico',
@@ -125,7 +126,7 @@ To bundle AI features:
 
 To show a console window (for debugging):
 
-Edit `AiDupeRanger_claude.spec`, change:
+Edit `DupeRangerAi.spec`, change:
 ```python
 console=False,  # Change to:
 console=True,
@@ -171,10 +172,10 @@ DupeRanger/
 │
 ├── build/                          # Temporary build files (safe to delete)
 ├── dist/                           # PyInstaller output (safe to delete)
-│   └── AiDupeRanger_claude.exe
+│   └── DupeRangerAi.exe
 │
-└── AiDupeRanger_claude_Package/    # Final package (ready to distribute)
-    ├── AiDupeRanger_claude.exe
+└── DupeRangerAi_Package/    # Final package (ready to distribute)
+   ├── DupeRangerAi.exe
     ├── README.md
     └── Examples/
 ```
@@ -199,7 +200,7 @@ Example:
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `name` | `AiDupeRanger_claude` | Executable name |
+| `name` | `DupeRangerAi` | Executable name |
 | `console` | `False` | Show console window |
 | `upx` | `True` | Enable UPX compression |
 | `icon` | `None` | Application icon |
@@ -285,8 +286,8 @@ sys.setrecursionlimit(5000)
 ### Quick Test
 
 ```powershell
-cd AiDupeRanger_claude_Package
-.\AiDupeRanger_claude.exe
+cd DupeRangerAi_Package
+.\DupeRangerAi.exe
 ```
 
 ### Comprehensive Test
@@ -318,17 +319,17 @@ Only if AI dependencies are installed:
 2. Test the executable
 3. Zip the package folder:
    ```powershell
-   Compress-Archive -Path AiDupeRanger_claude_Package -DestinationPath AiDupeRanger_claude_v1.0.zip
+   Compress-Archive -Path DupeRangerAi_Package -DestinationPath DupeRangerAi_v1.0.zip
    ```
 
 ### What to Distribute
 
 **Minimum:**
-- `AiDupeRanger_claude.exe`
+- `DupeRangerAi.exe`
 - `README.md`
 
 **Recommended:**
-- Full `AiDupeRanger_claude_Package/` folder
+ - Full `DupeRangerAi_Package/` folder
 - Installation instructions for AI features
 - License file
 - Changelog
@@ -375,11 +376,11 @@ jobs:
         with:
           python-version: '3.10'
       - run: pip install pyinstaller xxhash
-      - run: pyinstaller --clean --noconfirm AiDupeRanger_claude.spec
+      - run: pyinstaller --clean --noconfirm DupeRangerAi.spec
       - uses: actions/upload-artifact@v3
         with:
-          name: AiDupeRanger_claude
-          path: dist/AiDupeRanger_claude.exe
+          name: DupeRangerAi
+          path: dist/DupeRangerAi.exe
 ```
 
 ### Multi-Version Builds
@@ -388,15 +389,15 @@ To build multiple versions (with/without AI):
 
 ```powershell
 # Build base version
-pyinstaller --clean AiDupeRanger_claude.spec
-Rename-Item dist\AiDupeRanger_claude.exe AiDupeRanger_claude_base.exe
+pyinstaller --clean DupeRangerAi.spec
+Rename-Item dist\DupeRangerAi.exe DupeRangerAi_base.exe
 
 # Modify spec to include AI dependencies
 # (uncomment hiddenimports)
 
 # Build AI version
-pyinstaller --clean AiDupeRanger_claude.spec
-Rename-Item dist\AiDupeRanger_claude.exe AiDupeRanger_claude_ai.exe
+pyinstaller --clean DupeRangerAi.spec
+Rename-Item dist\DupeRangerAi.exe DupeRangerAi_ai.exe
 ```
 
 ---
@@ -408,7 +409,7 @@ To sign the executable for Windows SmartScreen:
 1. Obtain a code signing certificate
 2. Sign the executable:
    ```powershell
-   signtool sign /f certificate.pfx /p password /t http://timestamp.digicert.com AiDupeRanger_claude.exe
+   signtool sign /f certificate.pfx /p password /t http://timestamp.digicert.com DupeRangerAi.exe
    ```
 
 ---

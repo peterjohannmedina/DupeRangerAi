@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Small utility to search repository for legacy entry script references.
+"""Small utility to search repository for references to legacy entry scripts.
 
-This script looks for references to `AiDupeRanger.py`, `AiDupeRanger_grok`,
-`AiDupeRanger_claude`, and other deprecated names and prints any occurrences
-outside the `deprecated_variants` directory.
+This script looks for references to historical entry names and prints any
+occurrences outside the `deprecated_variants` directory. It helps CI prevent
+accidental re-introduction of deprecated names.
 
 Exit code: 0 = no legacy references found (outside allowed locations)
            1 = legacy references found.
@@ -23,7 +23,10 @@ EXCLUDE_DIRS = {
     "AiDupeRanger_grok",
     "AiDupeRanger_claude",
     "AiDupeRanger",
-    "DupeRangerAi_2025-11-11",
+    "__pycache__",
+    ".pytest_cache",
+    "local_tests",
+    "scripts",
 }
 EXCLUDE_FILES = {"AiDupeRanger.py", "AiDupeRanger_claude.spec", "AiDupeRanger_grok.spec"}
 

@@ -1,9 +1,10 @@
-# AiDupeRanger Development Guide
+# DupeRangerAi Development Guide
 
 ## Project Overview
-AiDupeRanger is a Python desktop application for intelligent duplicate file detection and organization. It combines fast hashing algorithms with AI-powered file categorization using Hugging Face transformers, built as a standalone Windows executable via PyInstaller.
+DupeRangerAi is a Python desktop application for intelligent duplicate file detection and organization. It combines fast hashing algorithms with AI-powered file categorization using Hugging Face transformers, built as a standalone Windows executable via PyInstaller.
 
-**Primary Variant**: `DupeRangerAi.py` is the canonical main developed version with full AI integration. Historical variants have been removed from the public repository to avoid confusion.
+**Primary Variant**: `DupeRangerAi.py` is the canonical main developed version with full AI integration.
+Note: legacy variants `AiDupeRanger_grok.py` and `AiDupeRanger_claude.py` were removed from the public repository to avoid confusion; `AiDupeRanger.py` remains in the tree as a deprecated compatibility shim.
 
 ## Architecture
 
@@ -142,7 +143,7 @@ torch, transformers, huggingface_hub, accelerate, sentencepiece
 3. Update UI display logic if needed
 
 ### Performance Optimization
-1. Profile with `synthetic_test.py` using large file sets
+1. Profile with `local_tests/synthetic_test.py` using large file sets
 2. Adjust chunk sizes based on storage type (NVMe: 8-16MB, Network: 1-4MB)
 3. Monitor GPU memory usage during AI classification
 4. Use storage-appropriate worker counts (NVMe: CPU×2, Network: 4-8 max)
@@ -153,7 +154,7 @@ torch, transformers, huggingface_hub, accelerate, sentencepiece
 3. Enable UPX compression for smaller executables
 
 ### Testing File Operations
-1. Use `test_actions.py` to validate rename/organize operations
+1. Use `local_tests/test_actions.py` to validate rename/organize operations
 2. Test on various filesystem types (NTFS, ZFS)
 3. Verify operation rollback via JSON logs
 
@@ -187,7 +188,7 @@ print(f"Phase completed in {elapsed:.2f}s")
 
 ### Source Files
 - `DupeRangerAi.py`: **Primary developed version** with full AI integration and file organization
-- Historical variants such as `AiDupeRanger_grok.py`, `AiDupeRanger_claude.py`, and `AiDupeRanger.py` have been removed from the public repository.
+ - Historical variants such as `AiDupeRanger_grok.py` and `AiDupeRanger_claude.py` have been removed from the public repository; `AiDupeRanger.py` is retained for backward compatibility and marked as deprecated.
 - `tk_file_organizer.py`: Legacy/backup implementation
 - `*_test.py`: Test scripts for validation
 

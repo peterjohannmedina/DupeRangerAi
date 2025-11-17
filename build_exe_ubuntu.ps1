@@ -127,11 +127,11 @@ if (Test-Path "docs") {
 if (Test-Path "install_deps.ps1") {
     Copy-Item "install_deps.ps1" "$OutputDir/" -ErrorAction SilentlyContinue
 }
-if (Test-Path "synthetic_test.py") {
-    Copy-Item "synthetic_test.py" "$OutputDir/" -ErrorAction SilentlyContinue
+if (Test-Path "local_tests\synthetic_test.py") {
+    Copy-Item "local_tests\synthetic_test.py" "$OutputDir/" -ErrorAction SilentlyContinue
 }
-if (Test-Path "test_actions.py") {
-    Copy-Item "test_actions.py" "$OutputDir/" -ErrorAction SilentlyContinue
+if (Test-Path "local_tests\test_actions.py") {
+    Copy-Item "local_tests\test_actions.py" "$OutputDir/" -ErrorAction SilentlyContinue
 }
 
 # Create Ubuntu-specific dependency installer
