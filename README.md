@@ -127,7 +127,6 @@ For users who prefer a standalone executable:
 # By default the build script targets the AI-enabled variant `AiDupeRanger_grok.py`.
 # To build a different script (for example the lightweight non-grok variant
 # `AiDupeRanger.py`), specify the entry script when running the build script:
-.
 ```powershell
 .\build_exe.ps1 -EntryScript "AiDupeRanger.py" -OutputDir "AiDupeRanger"
 ```

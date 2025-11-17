@@ -39,8 +39,9 @@ Write-Host "Build mode: $buildMode" -ForegroundColor Cyan
 Write-Host "Running PyInstaller..." -ForegroundColor Green
 Write-Host "Building entry script: $EntryScript" -ForegroundColor Cyan
 
+$name = [System.IO.Path]::GetFileNameWithoutExtension($EntryScript)
 $pyInstallerArgs = @(
-    "--name=AiDupeRanger_grok",
+    "--name=$name",
     $buildMode,
     "--windowed",
     "--clean",
@@ -80,9 +81,9 @@ New-Item -ItemType Directory -Path $OutputDir | Out-Null
 # Copy executable
 Write-Host "Copying executable..." -ForegroundColor Green
 if ($OneFile) {
-    Copy-Item "dist\AiDupeRanger_grok.exe" $OutputDir\
+    Copy-Item "dist\$name.exe" $OutputDir\
 } else {
-    Copy-Item -Recurse "dist\AiDupeRanger_grok\*" $OutputDir\
+    Copy-Item -Recurse "dist\$name\*" $OutputDir\
 }
 
 # Copy documentation and scripts
@@ -126,7 +127,7 @@ Built with PyTorch and Transformers. Requires compatible GPU drivers for CUDA ac
 $readmeContent | Out-File -FilePath "$OutputDir\README.md" -Encoding UTF8
 
 # Get build info
-$exePath = if ($OneFile) { "$OutputDir\AiDupeRanger_grok.exe" } else { "$OutputDir\AiDupeRanger_grok.exe" }
+$exePath = if ($OneFile) { "$OutputDir\$name.exe" } else { "$OutputDir\$name.exe" }
 $exeSize = if (Test-Path $exePath) {
     [math]::Round((Get-Item $exePath).Length / 1MB, 2)
 } else { "N/A" }
@@ -140,4 +141,4 @@ Get-ChildItem $OutputDir -Recurse | Where-Object { !$_.PSIsContainer } | ForEach
     Write-Host "  $relativePath" -ForegroundColor Gray
 }
 
-Write-Host "`nTo run: $OutputDir\AiDupeRanger_grok.exe" -ForegroundColor Yellow
+Write-Host "`nTo run: $OutputDir\$name.exe" -ForegroundColor Yellow
