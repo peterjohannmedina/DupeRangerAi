@@ -2,13 +2,13 @@ DupeRanger - tk_file_organizer Instructions
 
 Overview
 --------
-This repository contains `AiDupeRanger.py`, a Tkinter-based utility that scans a directory (including subdirectories), computes optional SHA-256 hashes for duplicate detection, and can optionally classify files using an AI model (via the `transformers` + `torch` stack).
+This repository contains `DupeRangerAi.py`, a Tkinter-based utility that scans a directory (including subdirectories), computes optional SHA-256 hashes for duplicate detection, and can optionally classify files using an AI model (via the `transformers` + `torch` stack).
 
 This document lists the dependencies to install on Windows and explains how to use the UI program.
 
 Important files created
 ----------------------
-- `AiDupeRanger.py`  - Main Tkinter UI script (in project root).
+- `DupeRangerAi.py`  - Main Tkinter UI script (in project root).
 - `install_deps.ps1`     - PowerShell helper that creates a venv and installs Python package dependencies.
 - `docs/INSTRUCTIONS.html` - HTML version of this documentation.
 
@@ -75,13 +75,13 @@ From PowerShell in the project folder:
 2) Run the Tkinter UI:
 
    ```powershell
-   .\.venv\Scripts\python.exe AiDupeRanger.py
+   .\.venv\Scripts\python.exe DupeRangerAi.py
    ```
 
    Or, if you installed dependencies globally (not recommended):
 
    ```powershell
-   python AiDupeRanger.py
+   python DupeRangerAi.py
    ```
 
 UI basics

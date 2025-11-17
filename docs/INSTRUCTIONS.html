@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DupeRanger - tk_file_organizer Instructions</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 24px; line-height:1.5 }
+    h1,h2 { color:#1f4e79 }
+    pre { background:#f4f4f4; padding:12px; overflow:auto }
+    code { background:#eee; padding:2px 4px }
+  </style>
+</head>
+<body>
+  <h1>DupeRanger - tk_file_organizer Instructions</h1>
+  <p>This document describes required dependencies and how to run the Tkinter UI.</p>
+
+  <h2>Overview</h2>
+  <p>The <code>DupeRangerAi.py</code> script scans a folder tree, optionally computes SHA-256 hashes for duplicate detection, and can optionally classify files using an AI model (via <code>transformers</code> + <code>torch</code>).</p>
+
+  <h2>Files added</h2>
+  <ul>
+  <li><code>DupeRangerAi.py</code> - main UI script</li>
+    <li><code>install_deps.ps1</code> - PowerShell helper to create a venv and install dependencies</li>
+    <li><code>docs/INSTRUCTIONS.txt</code> and this <code>docs/INSTRUCTIONS.html</code></li>
+  </ul>
+
+  <h2>Dependencies</h2>
+  <p>System:</p>
+  <ul>
+    <li>Python 3.10+ (you have Python 3.14)</li>
+    <li>Optional: NVIDIA driver and CUDA toolkit for GPU acceleration</li>
+  </ul>
+  <p>Python packages (installed by the helper script):</p>
+  <ul>
+    <li><code>transformers</code></li>
+    <li><code>huggingface_hub</code></li>
+    <li><code>accelerate</code> (optional)</li>
+    <li><code>torch</code>, <code>torchvision</code>, <code>torchaudio</code> (CPU or CUDA wheel)</li>
+    <li><code>sentencepiece</code> (optional)</li>
+  </ul>
+
+  <h2>Run the included installer (PowerShell)</h2>
+  <p>Open PowerShell and (optionally) allow script execution for the session:</p>
+  <pre><code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process</code></pre>
+  <p>Run the installer (CPU default):</p>
+  <pre><code>.\install_deps.ps1</code></pre>
+  <p>Run the installer attempting a GPU install (tries CUDA 12.1 wheel, falls back to CPU if it fails):</p>
+  <pre><code>.\install_deps.ps1 -UseGPU</code></pre>
+  <p>The installer will attempt to detect your CUDA version via <code>nvidia-smi</code> and install a matching PyTorch CUDA wheel when possible; if detection fails it falls back to a sensible default and will still install a CPU wheel if needed.</p>
+  <p>The installer will try multiple known CUDA wheel tags in sequence (detected tag, then <code>cu118</code>, then <code>cu117</code>) to increase the chance of compatibility. If all GPU wheel attempts fail, a CPU wheel will be installed automatically.</p>
+
+  <h2>What the installer does</h2>
+  <ul>
+    <li>Creates a virtual environment at <code>.venv</code> inside the project folder</li>
+    <li>Uses that venv's Python to upgrade <code>pip</code> and install the packages</li>
+    <li>If the <code>-UseGPU</code> flag is used, attempts to install a CUDA-enabled torch wheel (CUDA 12.1) and falls back to CPU on failure</li>
+  </ul>
+
+  <h2>Run the UI</h2>
+  <p>Activate the venv (optional):</p>
+  <pre><code>.\.venv\Scripts\Activate.ps1</code></pre>
+  <p>Run the program:</p>
+  <pre><code>.\.venv\Scripts\python.exe DupeRangerAi.py</code></pre>
+
+  <h2>UI quick guide</h2>
+  <ul>
+    <li>Browse to the directory (your ZFS share mapped via SMB)</li>
+    <li>Optional: enable SHA-256 hashing for duplicate detection (slow)</li>
+  <li>Optional: enable AI categorization to classify files (requires <code>transformers</code> + <code>torch</code>). Use the <strong>Compute device</strong> selector to choose <em>auto</em> (GPU if available), <em>gpu</em> (force GPU), or <em>cpu</em> (force CPU). Use the <strong>Show HF cache</strong> button to inspect the Hugging Face cache and largest model files.</li>
+    <li>Press Scan; use Export summary to save results as JSON</li>
+  </ul>
+
+  <h2>Hugging Face cache</h2>
+  <p>Models are cached under <code>%USERPROFILE%\.cache\huggingface\hub</code> by default. To change location, set environment variables before running the installer:</p>
+  <pre><code>$env:HF_HOME = 'D:\hf_cache'
+$env:TRANSFORMERS_CACHE = 'D:\hf_cache\transformers'</code></pre>
+
+  <h2>Troubleshooting and notes</h2>
+  <ul>
+    <li>Enable Windows Developer Mode or run as Admin to allow symlinks and reduce disk usage by the HF cache.</li>
+    <li>If the AI classifier fails, ensure you used the venv Python to install packages.</li>
+  </ul>
+
+  <footer>
+    <p>Generated: 2025-11-05</p>
+  </footer>
+</body>
+</html>
