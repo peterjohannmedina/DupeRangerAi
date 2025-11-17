@@ -147,6 +147,12 @@ python test_actions.py
 ```
 
 ## Troubleshooting
+## ⚠️ Deprecated variants
+
+This repository historically included a few alternate entry scripts and packaging variants (e.g., `AiDupeRanger_grok`, `AiDupeRanger_claude`, and `AiDupeRanger.py`). These variants are now archived and should not be used for new builds — `DupeRangerAi.py` is the canonical main script.
+
+If you need to inspect old variants, check `deprecated_variants/` where we keep archived copies and additional notes.
+
 
 ### "AI categorization unavailable"
 **Cause:** PyTorch/Transformers not installed

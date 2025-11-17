@@ -1,0 +1,19 @@
+name: Compatibility
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  docs-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for explicit references to AiDupeRanger in README/Docs
+        run: |
+          matches=$(grep -R "AiDupeRanger" -n docs || true)
+          if [ -n "$matches" ]; then
+            echo "Found AiDupeRanger references in docs:" >&2
+            echo "$matches" >&2
+            exit 1
+          fi

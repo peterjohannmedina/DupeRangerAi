@@ -49,7 +49,7 @@ AiDupeRanger is an intelligent file organization tool that helps you:
 
 ### Basic Usage (Without AI)
 
-1. **Launch the application**: Double-click `AiDupeRanger_claude.exe`
+1. **Launch the application**: Double-click `DupeRangerAi.exe` (preferred — canonical)
 
 2. **Select a directory**: Click "Browse" and choose the folder to scan
 
@@ -269,7 +269,7 @@ The executable also supports running from command line:
 .\AiDupeRanger_claude.exe
 
 # Future: Command-line mode (not yet implemented)
-# .\AiDupeRanger_claude.exe --scan "C:\Photos" --duplicates --organize
+# .\DupeRangerAi.exe --scan "C:\Photos" --duplicates --organize
 ```
 
 ---
