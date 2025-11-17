@@ -80,7 +80,7 @@ For advanced users:
 
 ```powershell
 # Using the spec file (recommended)
-pyinstaller --clean --noconfirm AiDupeRanger_claude.spec
+pyinstaller --clean --noconfirm AiDupeRanger_claude.spec  # archived variant — prefer `DupeRangerAi.py` now
 
 # Or build without spec file
 pyinstaller --onefile --windowed --name=AiDupeRanger_claude AiDupeRanger_claude.py

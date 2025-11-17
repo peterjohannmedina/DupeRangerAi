@@ -977,4 +977,18 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    # Maintain backwards compatibility: redirect calls to canonical entrypoint.
+    import warnings
+    from importlib import import_module
+
+    warnings.warn(
+        "AiDupeRanger is deprecated — please use DupeRangerAi.py as the primary entrypoint.",
+        DeprecationWarning,
+    )
+    try:
+        mod = import_module("DupeRangerAi")
+        entry = getattr(mod, "main")
+        entry()
+    except Exception:
+        # Fallback to local main if import fails
+        main()
