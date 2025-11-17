@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Test script for DupeRangerAi's action features.
+Test script for AiDupeRanger_grok's new action features.
 Creates a temporary directory with duplicates and tests the action application.
 """
-
-import tempfile
-import shutil
+""
+Test script for DupeRangerAi's action features (packaged copy).
+"""
 from pathlib import Path
 from queue import Queue
 import threading

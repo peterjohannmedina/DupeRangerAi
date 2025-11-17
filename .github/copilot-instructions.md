@@ -3,7 +3,7 @@
 ## Project Overview
 AiDupeRanger is a Python desktop application for intelligent duplicate file detection and organization. It combines fast hashing algorithms with AI-powered file categorization using Hugging Face transformers, built as a standalone Windows executable via PyInstaller.
 
-**Primary Variant**: `AiDupeRanger_grok.py` is the main developed version with full AI integration. Other variants (`AiDupeRanger_claude.py`, `AiDupeRanger.py`) exist for different configurations or legacy compatibility.
+**Primary Variant**: `DupeRangerAi.py` is the canonical main developed version with full AI integration. Other historical variants (`AiDupeRanger_grok.py`, `AiDupeRanger_claude.py`, `AiDupeRanger.py`) are preserved for reference but are no longer the canonical build targets.
 
 ## Architecture
 
@@ -251,5 +251,5 @@ print(f"Phase completed in {elapsed:.2f}s")
 
 ### Build Sizes
 - **Base executable** (`AiDupeRanger.py`): ~30MB (no AI bundled)
-- **AI executable** (`AiDupeRanger_grok.py`): ~1.5GB (with PyTorch GPU)
+- **AI executable** (`DupeRangerAi.py`): ~1.5GB with AI features (PyTorch GPU support available)
 - **Build time**: 2-30 minutes depending on configuration

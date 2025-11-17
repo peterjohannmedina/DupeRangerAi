@@ -1,16 +1,16 @@
-# Build script for AiDupeRanger_grok executable
+# Build script for DupeRangerAi executable
 # Creates a standalone Windows executable and collates all files
 
 param(
     [switch]$Clean,
     [switch]$OneFile,
-    [string]$OutputDir = "AiDupeRanger_grok",
-    [string]$EntryScript = "AiDupeRanger_grok.py"  # entry script to build (default: grok variant)
+    [string]$OutputDir = "DupeRangerAi",
+    [string]$EntryScript = "DupeRangerAi.py"  # entry script to build (default: canonical DupeRangerAi)
 )
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "Building AiDupeRanger_grok executable..." -ForegroundColor Cyan
+Write-Host "Building executable for entry script: $EntryScript" -ForegroundColor Cyan
 
 # Clean previous builds if requested
 if ($Clean) {
@@ -95,8 +95,9 @@ Copy-Item "install_deps.ps1" $OutputDir\
 Copy-Item "README.md" $OutputDir\ -ErrorAction SilentlyContinue
 
 # Create a simple README for the packaged version
+# Create a simple README for the packaged version
 $readmeContent = @"
-# AiDupeRanger_grok
+# DupeRangerAi
 
 AI-powered duplicate file finder and organizer for Windows.
 
@@ -108,7 +109,7 @@ AI-powered duplicate file finder and organizer for Windows.
 - ZFS-aware design
 
 ## Usage
-Run AiDupeRanger_grok.exe to start the application.
+Run DupeRangerAi.exe to start the application.
 
 ## Requirements
 - Windows 10/11

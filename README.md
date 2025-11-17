@@ -124,14 +124,14 @@ For users who prefer a standalone executable:
 # Build with PyInstaller
 .\build_exe.ps1
 
-# By default the build script targets the AI-enabled variant `AiDupeRanger_grok.py`.
+# By default the build script targets the canonical entry `DupeRangerAi.py`.
 # To build a different script (for example the lightweight non-grok variant
 # `AiDupeRanger.py`), specify the entry script when running the build script:
 ```powershell
 .\build_exe.ps1 -EntryScript "AiDupeRanger.py" -OutputDir "AiDupeRanger"
 ```
 
-# The executable will be created in AiDupeRanger_grok/AiDupeRanger_grok.exe (default)
+# The executable will be created in DupeRangerAi/DupeRangerAi.exe (default)
 ```
 
 ## Testing
